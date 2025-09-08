@@ -22,10 +22,25 @@ object Main {
   /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+    def innerfunction(parens: List[Char], lparensCount: Int): Boolean = {
+      if (parens.isEmpty) lparensCount == 0
+      else if (parens.head == '(')
+        innerfunction(parens.tail,lparensCount + 1) // cnt + 1, add to stack
+      else if (lparensCount == 0) false
+      else
+        innerfunction(parens.tail,lparensCount - 1) // cnt - 1, pop from stack
+    }
+
+    innerfunction(chars.filter(x => x == '(' || x == ')'), 0)
+  }
 
   /**
    * Exercise 3
    */
-  def countChange(money: Int, coins: List[Int]): Int = ???
+  def countChange(money: Int, coins: List[Int]): Int = {
+    if (money < 0) 0
+    else if (coins.isEmpty) if (money == 0) 1 else 0
+    else countChange(money - coins.head, coins) + countChange(money, coins.tail)
+  }
 }
