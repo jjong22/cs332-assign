@@ -45,8 +45,3 @@ build/
 
 ### Scala ###
 .bsp/
-
-### Should be not included by assn ###
-
-*.jar
-*.class
